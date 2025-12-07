@@ -1,11 +1,19 @@
-
 import { GoogleGenAI, Modality } from "@google/genai";
-
-// Initialize the client with the environment API key
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 export const generatePronunciation = async (text: string): Promise<string | undefined> => {
   try {
+    const apiKey = process.env.API_KEY;
+    
+    // Fail gracefully if no API Key is provided (common on static GitHub Pages demos)
+    if (!apiKey) {
+      console.warn("API Key is missing. Pronunciation feature is disabled.");
+      alert("Vui lòng cấu hình API_KEY để sử dụng tính năng đọc.");
+      return undefined;
+    }
+
+    // Initialize client only when needed
+    const ai = new GoogleGenAI({ apiKey: apiKey });
+
     // Using English IUPAC name for standard pronunciation
     const response = await ai.models.generateContent({
       model: "gemini-2.5-flash-preview-tts",

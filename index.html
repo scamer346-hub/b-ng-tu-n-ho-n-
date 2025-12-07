@@ -4,6 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bảng Tuần Hoàn Thông Minh</title>
+    <script>
+      // Polyfill for process.env to work in browser environments (like GitHub Pages)
+      window.process = {
+        env: {
+          // Bạn có thể điền API Key vào đây để test trên GitHub Pages. 
+          // Tuy nhiên, không nên commit key lên public repo.
+          // Nếu dùng Vite/Build tool, biến này sẽ được thay thế tự động.
+          API_KEY: '' 
+        }
+      }
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
